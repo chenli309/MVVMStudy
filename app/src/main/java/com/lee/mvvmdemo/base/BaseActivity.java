@@ -5,9 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -20,16 +23,19 @@ import com.lee.mvvmdemo.vm.OnHandleCallback;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewDataBinding> extends AppCompatActivity {
 
     protected VM viewModel;
+    protected DB dataBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = initViewModel();
         initObserve();
-        setContentView(onCreate());
+        int layoutId = onCreate();
+        setContentView(layoutId);
+        dataBinding = initDataBinding(layoutId);
         initView();
         initData();
     }
@@ -62,6 +68,13 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     protected abstract Class<VM> getViewModelClass();
 
     /**
+     * 初始化DataBinding
+     */
+    protected DB initDataBinding(@LayoutRes int layoutId) {
+        return DataBindingUtil.setContentView(this, layoutId);
+    }
+
+    /**
      * 监听当前ViewModel中 showDialog和error的值
      */
     private void initObserve() {
@@ -92,6 +105,14 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 
     public void showToast(@StringRes int resId) {
         ToastUtils.showToast(getContext(), resId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (dataBinding != null) {
+            dataBinding.unbind();
+        }
+        super.onDestroy();
     }
 
     public abstract class OnHttpCallback<T> implements OnHandleCallback<T> {
