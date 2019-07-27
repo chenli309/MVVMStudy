@@ -2,6 +2,9 @@ package com.lee.mvvmdemo;
 
 import android.app.Application;
 
+import com.blankj.utilcode.util.Utils;
+import com.lee.mvvmdemo.utils.AppUtil;
+
 public class App extends Application {
 
     private static App app;
@@ -14,5 +17,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+
+        Utils.init(this);
+        AppUtil.init(this);
     }
 }

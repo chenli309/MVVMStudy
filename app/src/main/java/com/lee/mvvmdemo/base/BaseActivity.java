@@ -2,20 +2,23 @@ package com.lee.mvvmdemo.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.lee.mvvmdemo.R;
+import com.lee.mvvmdemo.entity.RequestPageBean;
 import com.lee.mvvmdemo.utils.SystemUtils;
 import com.lee.mvvmdemo.utils.ToastUtils;
+import com.lee.mvvmdemo.view.VZTitleView;
 import com.lee.mvvmdemo.vm.BaseViewModel;
 import com.lee.mvvmdemo.vm.OnHandleCallback;
 
@@ -26,6 +29,8 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
 
     protected VM viewModel;
     protected DB dataBinding;
+
+    protected RequestPageBean mPageBean = new RequestPageBean();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,18 +58,15 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
      */
     protected abstract int onCreate();
 
-    protected abstract void initView();
-
-    protected abstract void initData();
-
     /**
      * 初始化ViewModel
      */
-    private VM initViewModel() {
-        return ViewModelProviders.of(this).get(getViewModelClass());
-    }
-
-    protected abstract Class<VM> getViewModelClass();
+//    private VM initViewModel() {
+//        return ViewModelProviders.of(this).get(getViewModelClass());
+//    }
+//
+//    protected abstract Class<VM> getViewModelClass();
+    protected abstract VM initViewModel();
 
     /**
      * 初始化DataBinding
@@ -72,6 +74,10 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
     protected DB initDataBinding(@LayoutRes int layoutId) {
         return DataBindingUtil.setContentView(this, layoutId);
     }
+
+    protected abstract void initView();
+
+    protected abstract void initData();
 
     /**
      * 监听当前ViewModel中 showDialog和error的值
@@ -144,5 +150,41 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         public void onCompleted() {
             showToast("结束请求...");
         }
+    }
+
+    // =====================================标题栏设置==============================================
+    protected VZTitleView initTitleView(@StringRes int titleResId) {
+        return initTitleView(getString(titleResId), Color.WHITE, false);
+    }
+
+    protected VZTitleView initTitleView(@StringRes int titleResId, boolean isPaddingTop) {
+        return initTitleView(getString(titleResId), Color.WHITE, isPaddingTop);
+    }
+
+    protected VZTitleView initTitleView(String title) {
+        return initTitleView(title, Color.WHITE, false);
+    }
+
+    protected VZTitleView initTitleView(String title, @ColorInt int bgColor) {
+        return initTitleView(title, bgColor, false);
+    }
+
+    protected VZTitleView initTitleView(@StringRes int titleResId, @ColorInt int bgColor, boolean isPaddingTop) {
+        return initTitleView(getString(titleResId), bgColor, isPaddingTop);
+    }
+
+    protected VZTitleView initTitleView(String title, @ColorInt int bgColor, boolean isPaddingTop) {
+        VZTitleView mTitleView = findViewById(R.id.titleView);
+        if (mTitleView == null) {
+            return null;
+        }
+
+        mTitleView.setToolbarBackgroundColor(bgColor);
+        mTitleView.setTitleText(title);
+        if (isPaddingTop) {
+            mTitleView.setPaddingTop();
+        }
+
+        return mTitleView;
     }
 }

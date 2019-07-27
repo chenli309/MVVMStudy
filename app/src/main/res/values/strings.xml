@@ -6,4 +6,12 @@
     <string name="result_connect_timeout_error">服务器连接超时，请稍后再试。</string>
     <string name="result_empty_error">系统繁忙，请稍后再试。</string>
     <string name="result_network_unavailable_error">网络不给力，请检查网络。</string>
+
+    <string name="back">返回</string>
+
+    <string name="loading">加载中&#8230;</string>
+    <string name="load_more_end">没有更多了</string>
+    <string name="load_failed">加载失败</string>
+
+    <string name="main_title">首页</string>
 </resources>

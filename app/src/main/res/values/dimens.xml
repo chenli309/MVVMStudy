@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="divider_height">1px</dimen>
+    <dimen name="statusbar_view_height">0dp</dimen>
+    <dimen name="base_title_bar_height">48dp</dimen>
+
+    <dimen name="f10">10sp</dimen>
+    <dimen name="f11">11sp</dimen>
+    <dimen name="f12">12sp</dimen>
+    <dimen name="f13">13sp</dimen>
+    <dimen name="f14">14sp</dimen>
+    <dimen name="f15">15sp</dimen>
+    <dimen name="f16">16sp</dimen>
+    <dimen name="f17">17sp</dimen>
+    <dimen name="f18">18sp</dimen>
+    <dimen name="f19">19sp</dimen>
+    <dimen name="f20">20sp</dimen>
+    <dimen name="f21">21sp</dimen>
+    <dimen name="f22">22sp</dimen>
+    <dimen name="f23">23sp</dimen>
+    <dimen name="f24">24sp</dimen>
+    <dimen name="f25">25sp</dimen>
+    <dimen name="f26">26sp</dimen>
+    <dimen name="f27">27sp</dimen>
+    <dimen name="f28">28sp</dimen>
+    <dimen name="f29">29sp</dimen>
+    <dimen name="f30">30sp</dimen>
+</resources>

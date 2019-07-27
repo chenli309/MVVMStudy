@@ -5,12 +5,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.lee.mvvmdemo.activity.CategoryActivity;
 import com.lee.mvvmdemo.databinding.ActivityMainBinding;
 import com.lee.mvvmdemo.vm.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MainViewModel mMainViewModel;
     private ActivityMainBinding mBinding;
 
@@ -26,5 +30,14 @@ public class MainActivity extends AppCompatActivity {
                 mBinding.tvName.setText(String.valueOf(aLong));
             }
         });
+
+        mBinding.tvNext.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.tvNext) {
+            ActivityUtils.startActivity(this, CategoryActivity.class);
+        }
     }
 }

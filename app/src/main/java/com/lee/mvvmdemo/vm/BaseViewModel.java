@@ -8,22 +8,29 @@ import androidx.lifecycle.AndroidViewModel;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class BaseViewModel<T extends BaseRepository> extends AndroidViewModel {
+public abstract class BaseViewModel<T extends BaseRepository> extends AndroidViewModel {
 
-    private T repository;
+//    private T repository;
 
-    public BaseViewModel(@NonNull Application application, T repository) {
+    public BaseViewModel(@NonNull Application application) {
         super(application);
-        this.repository = repository;
     }
+
+//    public BaseViewModel(@NonNull Application application, T repository) {
+//        super(application);
+//        this.repository = repository;
+//    }
 
     public Application getApp() {
         return getApplication();
     }
 
-    public T getRepository() {
-        return repository;
-    }
+//    public T getRepository() {
+//        return repository;
+//    }
+
+
+    public abstract T getRepository();
 
     /**
      * 管理RxJava请求
