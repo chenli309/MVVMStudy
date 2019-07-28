@@ -29,6 +29,9 @@
         <activity
             android:name=".activity.CategoryActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FlexboxTestActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

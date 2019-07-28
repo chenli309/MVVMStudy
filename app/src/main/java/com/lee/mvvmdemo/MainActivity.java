@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.lee.mvvmdemo.activity.CategoryActivity;
+import com.lee.mvvmdemo.activity.FlexboxTestActivity;
 import com.lee.mvvmdemo.databinding.ActivityMainBinding;
 import com.lee.mvvmdemo.vm.MainViewModel;
 
@@ -32,12 +33,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         mBinding.tvNext.setOnClickListener(this);
+        mBinding.tvFlexbox.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.tvNext) {
             ActivityUtils.startActivity(this, CategoryActivity.class);
+        } else if (view.getId() == R.id.tvFlexbox) {
+            ActivityUtils.startActivity(this, FlexboxTestActivity.class);
         }
     }
 }
