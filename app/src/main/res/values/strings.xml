@@ -13,5 +13,14 @@
     <string name="load_more_end">没有更多了</string>
     <string name="load_failed">加载失败</string>
 
+    <string name="com_ok">确定</string>
+    <string name="com_cancel">取消</string>
+    <string name="com_save">保存</string>
+    <string name="com_setting">设置</string>
+    <string name="com_tip">提示</string>
+    <string name="com_loading">正在加载&#8230;</string>
+    <string name="com_waiting">正在加载，请稍后&#8230;</string>
+    <string name="com_waiting_login">正在登录，请稍后&#8230;</string>
+
     <string name="main_title">首页</string>
 </resources>

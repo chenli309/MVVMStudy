@@ -3,6 +3,7 @@ package com.lee.mvvmdemo.activity;
 import android.graphics.Color;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,6 +17,7 @@ import com.lee.mvvmdemo.constant.Constants;
 import com.lee.mvvmdemo.databinding.ActivityCategoryLayoutBinding;
 import com.lee.mvvmdemo.entity.CategoryResult;
 import com.lee.mvvmdemo.view.VZTitleView;
+import com.lee.mvvmdemo.vm.Resource;
 import com.lee.mvvmdemo.vm.impl.CategoryViewModel;
 
 public class CategoryActivity extends BaseActivity<CategoryViewModel, ActivityCategoryLayoutBinding> implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener {
@@ -61,44 +63,50 @@ public class CategoryActivity extends BaseActivity<CategoryViewModel, ActivityCa
     public void onRefresh() {
         mPageBean.firstPage();
         mAdapter.setEnableLoadMore(false);
-        viewModel.getCategory(Constants.HTTP_CATEGORY_ANDROID, mPageBean.size, mPageBean.no).observe(this,
-                resource -> resource.handle(new OnHttpCallback<CategoryResult>() {
-                    @Override
-                    public void onSuccess(CategoryResult data) {
-                        mAdapter.setNewData(data.results);
-                        mAdapter.setEnableLoadMore(true);
-                        mAdapter.setLoadMoreStatus(data.results.size());
-                    }
+        viewModel.getCategory(Constants.HTTP_CATEGORY_ANDROID, mPageBean.size, mPageBean.no).observe(this, this::handlerLoadRequest);
+    }
 
-                    @Override
-                    public void onCompleted() {
-                        super.onCompleted();
-                        dataBinding.swipeRefreshLayout.setRefreshing(false);
-                    }
-                }));
+    private void handlerLoadRequest(@NonNull Resource<CategoryResult> resource) {
+        resource.handle(new OnHttpCallback<CategoryResult>() {
+            @Override
+            public void onSuccess(CategoryResult data) {
+                mAdapter.setNewData(data.results);
+                mAdapter.setEnableLoadMore(true);
+                mAdapter.setLoadMoreStatus(data.results.size());
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                dataBinding.swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
     public void onLoadMoreRequested() {
-        viewModel.getCategory(Constants.HTTP_CATEGORY_ANDROID, mPageBean.size, mPageBean.nextPage()).observe(this,
-                resource -> resource.handle(new OnHttpCallback<CategoryResult>() {
-                    @Override
-                    public void onSuccess(CategoryResult data) {
-                        if (ObjectUtils.isEmpty(data.results)) {
-                            mAdapter.setLoadMoreStatus(0);
-                            return;
-                        }
+        viewModel.getCategory(Constants.HTTP_CATEGORY_ANDROID, mPageBean.size, mPageBean.nextPage()).observe(this, this::handlerMoreRequest);
+    }
 
-                        mPageBean.addPageNo();
-                        mAdapter.addData(data.results);
-                        mAdapter.setLoadMoreStatus(data.results.size());
-                    }
+    private void handlerMoreRequest(@NonNull Resource<CategoryResult> resource) {
+        resource.handle(new OnHttpCallback<CategoryResult>() {
+            @Override
+            public void onSuccess(CategoryResult data) {
+                if (ObjectUtils.isEmpty(data.results)) {
+                    mAdapter.setLoadMoreStatus(0);
+                    return;
+                }
 
-                    @Override
-                    public void onFailure(String msg) {
-                        super.onFailure(msg);
-                        mAdapter.loadMoreFail();
-                    }
-                }));
+                mPageBean.addPageNo();
+                mAdapter.addData(data.results);
+                mAdapter.setLoadMoreStatus(data.results.size());
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                super.onFailure(msg);
+                mAdapter.loadMoreFail();
+            }
+        });
     }
 }

@@ -7,7 +7,16 @@
     <color name="ripple_f7f5f5_color">#ffF7F5F5</color>
     <color name="ripple_common_color">#ffdcdcdc</color>
     <color name="ripple_orange_color">#2f000000</color>
-    <color name="transparent">#00000000</color>
+
+    <color name="white">#FFFFFF</color>  <!-- 白色 -->
+    <color name="yellow">#FFFF00</color> <!-- 黄色 -->
+    <color name="gold">#FFD700</color>   <!-- 金色 -->
+    <color name="orange">#FF7E33</color> <!-- 橙色 -->
+    <color name="red">#C34A42</color>    <!-- 红色 -->
+    <color name="gray">#808080</color>   <!-- 灰色 -->
+    <color name="green">#1AAD19</color>  <!-- 绿色 -->
+    <color name="blue">#0000FF</color>   <!-- 蓝色 -->
+    <color name="black">#000000</color>  <!-- 黑色 -->
 
     <color name="color_cb333333">#333333</color>
     <color name="color_cb666666">#666666</color>
@@ -22,4 +31,28 @@
     <color name="color_cw">#FFFFFF</color>
     <color name="color_cr1">#DF6F3F</color>
     <color name="color_cblue1">#4A90E2</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent05">#0B000000</color>
+    <color name="transparent10">#1A000000</color>
+    <color name="transparent20">#33000000</color>
+    <color name="transparent30">#4D000000</color>
+    <color name="transparent40">#66000000</color>
+    <color name="transparent50">#80000000</color>
+    <color name="transparent60">#9A000000</color>
+    <color name="transparent70">#B3000000</color>
+    <color name="transparent80">#CC000000</color>
+    <color name="transparent90">#E5000000</color>
+    <color name="transparent100">#FF000000</color>
+
+    <color name="transparent10_white">#1Affffff</color>
+    <color name="transparent20_white">#33ffffff</color>
+    <color name="transparent30_white">#4Dffffff</color>
+    <color name="transparent40_white">#66ffffff</color>
+    <color name="transparent50_white">#80ffffff</color>
+    <color name="transparent60_white">#9Affffff</color>
+    <color name="transparent70_white">#B3ffffff</color>
+    <color name="transparent80_white">#CCffffff</color>
+    <color name="transparent90_white">#E5ffffff</color>
+    <color name="transparent100_white">#FFffffff</color>
 </resources>

@@ -26,4 +26,9 @@
     <dimen name="f28">28sp</dimen>
     <dimen name="f29">29sp</dimen>
     <dimen name="f30">30sp</dimen>
+
+    <dimen name="item_margin_large">16dp</dimen>
+    <dimen name="item_margin">12dp</dimen>
+    <dimen name="item_margin_small">10dp</dimen>
+    <dimen name="item_margin_smaller">8dp</dimen>
 </resources>

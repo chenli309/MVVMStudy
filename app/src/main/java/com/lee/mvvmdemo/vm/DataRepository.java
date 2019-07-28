@@ -44,4 +44,11 @@ public class DataRepository extends BaseRepository {
                 });
         return mutableLiveData;
     }
+
+//    public Observable<Resource<CategoryResult>> getCategory(String category, int number, int curPage) {
+//        return getApiService().getCategory(category, number, curPage)
+//                .compose(Transformer.applyRemoteTransformer())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
 }

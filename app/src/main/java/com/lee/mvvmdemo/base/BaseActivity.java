@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import com.lee.mvvmdemo.R;
+import com.lee.mvvmdemo.dialog.ProgressDialogHelper;
 import com.lee.mvvmdemo.entity.RequestPageBean;
 import com.lee.mvvmdemo.utils.SystemUtils;
 import com.lee.mvvmdemo.utils.ToastUtils;
@@ -117,13 +118,14 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         if (dataBinding != null) {
             dataBinding.unbind();
         }
+        dismissProgressDialog();
         super.onDestroy();
     }
 
     public abstract class OnHttpCallback<T> implements OnHandleCallback<T> {
         @Override
         public void onLoading() {
-            showToast("开始请求...");
+            showProgressDialog();
         }
 
         @Override
@@ -148,7 +150,28 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
 
         @Override
         public void onCompleted() {
-            showToast("结束请求...");
+            dismissProgressDialog();
+        }
+    }
+
+    // ====================================================================
+    protected ProgressDialogHelper progressDialogHelper;
+
+    protected void showProgressDialog() {
+        showProgressDialog(R.string.com_waiting);
+    }
+
+    protected void showProgressDialog(int resId) {
+        if (progressDialogHelper == null) {
+            progressDialogHelper = new ProgressDialogHelper(this);
+        }
+        progressDialogHelper.setMessage(resId);
+        progressDialogHelper.show();
+    }
+
+    protected void dismissProgressDialog() {
+        if (progressDialogHelper != null && progressDialogHelper.isShowing()) {
+            progressDialogHelper.dismiss();
         }
     }
 

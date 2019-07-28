@@ -11,6 +11,7 @@ import com.lee.mvvmdemo.vm.DataRepository;
 import com.lee.mvvmdemo.vm.Resource;
 
 public class CategoryViewModel extends BaseViewModel<DataRepository> {
+
     public CategoryViewModel(@NonNull Application application) {
         super(application);
     }
